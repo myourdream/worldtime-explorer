@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "city-card": "/components/city-card/city-card"
+  },
+  "navigationBarTitleText": "搜索城市",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "light"
+}

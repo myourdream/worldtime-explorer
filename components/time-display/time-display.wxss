@@ -1,0 +1,333 @@
+/* components/time-display/time-display.wxss */
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 120rpx;
+}
+
+/* 主要时间显示 */
+.main-time {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.time-hours {
+  font-size: 64rpx;
+  color: #ffffff;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+}
+
+.time-minutes {
+  font-size: 64rpx;
+  color: #ffffff;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+}
+
+.time-seconds {
+  font-size: 48rpx;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+}
+
+.time-separator {
+  font-size: 64rpx;
+  color: #ffffff;
+  margin: 0 8rpx;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+/* AM/PM 显示 */
+.time-period {
+  margin-top: 10rpx;
+}
+
+.period-text {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+}
+
+/* 日期显示 */
+.date-display {
+  margin-top: 15rpx;
+}
+
+.date-text {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+}
+
+/* 时区信息 */
+.timezone-info {
+  margin-top: 10rpx;
+}
+
+.timezone-text {
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 1rpx;
+}
+
+/* 加载状态 */
+.loading-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading-dots {
+  display: flex;
+  gap: 8rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  animation: dotPulse 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes dotPulse {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 错误状态 */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.error-icon {
+  font-size: 40rpx;
+}
+
+.error-text {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+/* 尺寸变体 */
+.time-display.small .time-hours,
+.time-display.small .time-minutes {
+  font-size: 48rpx;
+}
+
+.time-display.small .time-seconds {
+  font-size: 36rpx;
+}
+
+.time-display.small .time-separator {
+  font-size: 48rpx;
+}
+
+.time-display.small .period-text {
+  font-size: 20rpx;
+}
+
+.time-display.small .date-text {
+  font-size: 20rpx;
+}
+
+.time-display.small .timezone-text {
+  font-size: 18rpx;
+}
+
+.time-display.large .time-hours,
+.time-display.large .time-minutes {
+  font-size: 96rpx;
+}
+
+.time-display.large .time-seconds {
+  font-size: 72rpx;
+}
+
+.time-display.large .time-separator {
+  font-size: 96rpx;
+}
+
+.time-display.large .period-text {
+  font-size: 32rpx;
+}
+
+.time-display.large .date-text {
+  font-size: 32rpx;
+}
+
+.time-display.large .timezone-text {
+  font-size: 24rpx;
+}
+
+/* 主题变体 */
+.time-display.dark {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12rpx;
+  padding: 20rpx;
+}
+
+.time-display.light {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12rpx;
+  padding: 20rpx;
+}
+
+.time-display.gradient {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+  border-radius: 12rpx;
+  padding: 20rpx;
+}
+
+/* 动画效果 */
+.time-display {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.time-hours,
+.time-minutes,
+.time-seconds {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.time-hours {
+  animation-delay: 0.1s;
+}
+
+.time-minutes {
+  animation-delay: 0.2s;
+}
+
+.time-seconds {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .time-hours,
+  .time-minutes {
+    font-size: 56rpx;
+  }
+  
+  .time-seconds {
+    font-size: 42rpx;
+  }
+  
+  .time-separator {
+    font-size: 56rpx;
+  }
+  
+  .period-text {
+    font-size: 22rpx;
+  }
+  
+  .date-text {
+    font-size: 22rpx;
+  }
+  
+  .timezone-text {
+    font-size: 18rpx;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .time-display.light {
+    background: rgba(52, 73, 94, 0.3);
+  }
+  
+  .time-display.dark {
+    background: rgba(44, 62, 80, 0.5);
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .time-hours,
+  .time-minutes,
+  .time-seconds {
+    text-shadow: 0 0 0 transparent;
+    color: #000000;
+  }
+  
+  .time-separator {
+    color: #000000;
+  }
+  
+  .period-text,
+  .date-text,
+  .timezone-text {
+    color: #000000;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .time-separator {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .time-display,
+  .time-hours,
+  .time-minutes,
+  .time-seconds {
+    animation: none;
+  }
+  
+  .dot {
+    animation: none;
+    opacity: 0.7;
+  }
+}

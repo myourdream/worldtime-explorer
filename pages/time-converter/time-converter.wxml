@@ -1,0 +1,135 @@
+<!-- pages/time-converter/time-converter.wxml -->
+<view class="container">
+  
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <text class="page-title">时区转换</text>
+    <text class="page-subtitle">在不同时区间转换时间</text>
+  </view>
+
+  <!-- 源时区选择 -->
+  <view class="timezone-section">
+    <view class="section-title">源时区</view>
+    <view class="timezone-selector" bindtap="selectSourceTimezone">
+      <view class="timezone-info">
+        <text class="timezone-name">{{sourceTimezone.name || '选择时区'}}</text>
+        <text class="timezone-detail" wx:if="{{sourceTimezone.timezone}}">{{sourceTimezone.timezone}}</text>
+      </view>
+      <text class="selector-arrow">></text>
+    </view>
+    
+    <!-- 源时区时间显示 -->
+    <view class="time-display-section" wx:if="{{sourceTimezone.timezone}}">
+      <time-display 
+        time="{{sourceTime}}" 
+        timezone="{{sourceTimezone.timezone}}"
+        format="FULL"
+        show-seconds="{{true}}"
+        show-date="{{true}}"
+        size="normal"
+        theme="gradient">
+      </time-display>
+    </view>
+  </view>
+
+  <!-- 转换按钮 -->
+  <view class="convert-section">
+    <button class="convert-btn" bindtap="performConversion" disabled="{{!sourceTimezone.timezone || !targetTimezone.timezone}}">
+      <text class="convert-icon">🔄</text>
+      <text class="convert-text">转换时间</text>
+    </button>
+  </view>
+
+  <!-- 目标时区选择 -->
+  <view class="timezone-section">
+    <view class="section-title">目标时区</view>
+    <view class="timezone-selector" bindtap="selectTargetTimezone">
+      <view class="timezone-info">
+        <text class="timezone-name">{{targetTimezone.name || '选择时区'}}</text>
+        <text class="timezone-detail" wx:if="{{targetTimezone.timezone}}">{{targetTimezone.timezone}}</text>
+      </view>
+      <text class="selector-arrow">></text>
+    </view>
+    
+    <!-- 目标时区时间显示 -->
+    <view class="time-display-section" wx:if="{{targetTimezone.timezone && convertedTime}}">
+      <time-display 
+        time="{{convertedTime}}" 
+        timezone="{{targetTimezone.timezone}}"
+        format="FULL"
+        show-seconds="{{true}}"
+        show-date="{{true}}"
+        size="normal"
+        theme="gradient">
+      </time-display>
+    </view>
+  </view>
+
+  <!-- 时间差信息 -->
+  <view class="time-difference" wx:if="{{timeDifference !== null}}">
+    <view class="difference-card">
+      <text class="difference-label">时区差</text>
+      <text class="difference-value">{{timeDifference}}</text>
+    </view>
+  </view>
+
+  <!-- 快捷时区 -->
+  <view class="quick-timezones">
+    <view class="section-title">快捷时区</view>
+    <view class="timezone-grid">
+      <view class="quick-timezone-item" 
+            wx:for="{{quickTimezones}}" 
+            wx:key="timezone"
+            bindtap="selectQuickTimezone"
+            data-timezone="{{item}}">
+        <text class="quick-flag">{{item.flag}}</text>
+        <text class="quick-name">{{item.name}}</text>
+        <text class="quick-country">{{item.country}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 自定义时间输入 -->
+  <view class="custom-time-section">
+    <view class="section-title">自定义时间</view>
+    <view class="time-input-card">
+      <view class="input-group">
+        <text class="input-label">日期</text>
+        <picker mode="date" value="{{customDate}}" bindchange="onDateChange">
+          <view class="picker-input">{{customDate}}</view>
+        </picker>
+      </view>
+      <view class="input-group">
+        <text class="input-label">时间</text>
+        <picker mode="time" value="{{customTime}}" bindchange="onTimeChange">
+          <view class="picker-input">{{customTime}}</view>
+        </picker>
+      </view>
+      <button class="apply-time-btn" bindtap="applyCustomTime" size="mini">应用时间</button>
+    </view>
+  </view>
+
+  <!-- 转换历史 -->
+  <view class="conversion-history" wx:if="{{conversionHistory.length > 0}}">
+    <view class="section-title">转换历史</view>
+    <view class="history-list">
+      <view class="history-item" 
+            wx:for="{{conversionHistory}}" 
+            wx:key="index"
+            bindtap="useHistoryItem"
+            data-item="{{item}}">
+        <view class="history-info">
+          <text class="history-source">{{item.source.name}} → {{item.target.name}}</text>
+          <text class="history-time">{{item.time}}</text>
+        </view>
+        <text class="history-arrow">></text>
+      </view>
+    </view>
+    <button class="clear-history-btn" bindtap="clearHistory" size="mini">清空历史</button>
+  </view>
+
+  <!-- 操作提示 -->
+  <view class="operation-tips">
+    <text class="tip-text">💡 选择源时区和目标时区，点击转换按钮进行时间转换</text>
+  </view>
+</view>

@@ -1,0 +1,41 @@
+<!-- components/time-display/time-display.wxml -->
+<view class="time-display {{size}} {{theme}}">
+  
+  <!-- 主要时间显示 -->
+  <view class="main-time">
+    <text class="time-hours">{{hours}}</text>
+    <text class="time-separator">:</text>
+    <text class="time-minutes">{{minutes}}</text>
+    <text class="time-seconds" wx:if="{{showSeconds}}">:{{seconds}}</text>
+  </view>
+
+  <!-- AM/PM 显示 -->
+  <view class="time-period" wx:if="{{showPeriod}}">
+    <text class="period-text">{{period}}</text>
+  </view>
+
+  <!-- 日期显示 -->
+  <view class="date-display" wx:if="{{showDate}}">
+    <text class="date-text">{{formattedDate}}</text>
+  </view>
+
+  <!-- 时区信息 -->
+  <view class="timezone-info" wx:if="{{showTimezone}}">
+    <text class="timezone-text">{{timezoneName}}</text>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{isLoading}}">
+    <view class="loading-dots">
+      <view class="dot"></view>
+      <view class="dot"></view>
+      <view class="dot"></view>
+    </view>
+  </view>
+
+  <!-- 错误状态 -->
+  <view class="error-state" wx:if="{{hasError}}">
+    <text class="error-icon">⚠️</text>
+    <text class="error-text">{{errorMessage}}</text>
+  </view>
+</view>

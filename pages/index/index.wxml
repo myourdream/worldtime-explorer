@@ -1,0 +1,94 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="header-content">
+      <text class="page-title">世界时间</text>
+      <text class="page-subtitle">实时查看全球主要城市时间</text>
+    </view>
+    <view class="header-actions">
+      <button class="refresh-btn" bindtap="refreshData" size="mini">
+        <text class="icon-refresh">🔄</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 当前时间显示 -->
+  <view class="current-time-section">
+    <view class="current-time-card">
+      <view class="time-label">当前时间</view>
+      <time-display 
+        time="{{currentTime}}" 
+        timezone="{{localTimezone}}"
+        format="FULL"
+        show-seconds="{{true}}"
+        show-date="{{true}}"
+        size="large"
+        theme="gradient">
+      </time-display>
+    </view>
+  </view>
+
+  <!-- 城市列表 -->
+  <view class="cities-section">
+    <view class="section-header">
+      <text class="section-title">主要城市</text>
+      <text class="city-count">{{cities.length}}个城市</text>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-state" wx:if="{{isLoading}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">正在加载城市时间...</text>
+    </view>
+
+    <!-- 城市卡片列表 -->
+    <view class="cities-list" wx:if="{{!isLoading && cities.length > 0}}">
+      <city-card 
+        wx:for="{{cities}}" 
+        wx:key="timezone"
+        city-data="{{item}}"
+        current-time="{{currentTime}}"
+        show-remove="{{false}}"
+        bind:favoriteChange="onFavoriteChange"
+        bind:cityTap="onCityTap">
+      </city-card>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!isLoading && cities.length === 0}}">
+      <text class="empty-icon">🌍</text>
+      <text class="empty-text">暂无城市数据</text>
+      <button class="add-city-btn" bindtap="goToSearch">添加城市</button>
+    </view>
+
+    <!-- 错误状态 -->
+    <view class="error-state" wx:if="{{hasError}}">
+      <text class="error-icon">⚠️</text>
+      <text class="error-text">{{errorMessage}}</text>
+      <button class="retry-btn" bindtap="retryLoad">重试</button>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="goToSearch">
+      <text class="action-icon">🔍</text>
+      <text class="action-text">搜索城市</text>
+    </view>
+    <view class="action-item" bindtap="goToConverter">
+      <text class="action-icon">🔄</text>
+      <text class="action-text">时区转换</text>
+    </view>
+    <view class="action-item" bindtap="showSettings">
+      <text class="action-icon">⚙️</text>
+      <text class="action-text">设置</text>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="footer-tips">
+    <text class="tip-text">💡 长按城市卡片可以添加到收藏</text>
+  </view>
+</view>

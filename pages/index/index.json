@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "city-card": "/components/city-card/city-card",
+    "time-display": "/components/time-display/time-display"
+  },
+  "navigationBarTitleText": "世界时间",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "light"
+}

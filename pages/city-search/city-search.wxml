@@ -1,0 +1,119 @@
+<!-- pages/city-search/city-search.wxml -->
+<view class="container">
+  
+  <!-- 搜索头部 -->
+  <view class="search-header">
+    <view class="search-box">
+      <input class="search-input" 
+             placeholder="输入城市名称或国家名称" 
+             value="{{searchKeyword}}"
+             bindinput="onSearchInput"
+             bindconfirm="onSearchConfirm"
+             focus="{{true}}" />
+      <button class="search-btn" bindtap="onSearchConfirm" size="mini">
+        <text class="search-icon">🔍</text>
+      </button>
+    </view>
+    <view class="search-tips">
+      <text class="tip-text">{{searchTips}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索历史 -->
+  <view class="search-history" wx:if="{{searchHistory.length > 0 && !searchKeyword}}">
+    <view class="history-header">
+      <text class="history-title">搜索历史</text>
+      <button class="clear-history-btn" bindtap="clearHistory" size="mini">清空</button>
+    </view>
+    <view class="history-list">
+      <view class="history-item" 
+            wx:for="{{searchHistory}}" 
+            wx:key="index"
+            bindtap="selectHistoryItem"
+            data-keyword="{{item}}">
+        <text class="history-text">{{item}}</text>
+        <text class="history-delete" bindtap="deleteHistoryItem" data-index="{{index}}" catchtap="true">✕</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 热门城市 -->
+  <view class="popular-cities" wx:if="{{!searchKeyword}}">
+    <view class="section-header">
+      <text class="section-title">热门城市</text>
+    </view>
+    <view class="cities-grid">
+      <view class="city-item" 
+            wx:for="{{popularCities}}" 
+            wx:key="timezone"
+            bindtap="selectCity"
+            data-city="{{item}}">
+        <text class="city-flag">{{item.flag}}</text>
+        <text class="city-name">{{item.name}}</text>
+        <text class="city-country">{{item.country}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="search-results" wx:if="{{searchKeyword}}">
+    <view class="results-header">
+      <text class="results-title">搜索结果</text>
+      <text class="results-count">{{searchResults.length}}个结果</text>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-state" wx:if="{{isSearching}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">正在搜索...</text>
+    </view>
+
+    <!-- 搜索结果列表 -->
+    <view class="results-list" wx:if="{{!isSearching && searchResults.length > 0}}">
+      <city-card 
+        wx:for="{{searchResults}}" 
+        wx:key="timezone"
+        city-data="{{item}}"
+        current-time="{{currentTime}}"
+        show-remove="{{false}}"
+        bind:favoriteChange="onFavoriteChange"
+        bind:cityTap="onCityTap">
+      </city-card>
+    </view>
+
+    <!-- 无结果状态 -->
+    <view class="no-results" wx:if="{{!isSearching && searchResults.length === 0}}">
+      <text class="no-results-icon">🔍</text>
+      <text class="no-results-text">未找到相关城市</text>
+      <text class="no-results-tip">请尝试其他关键词</text>
+    </view>
+  </view>
+
+  <!-- 时区分组 -->
+  <view class="timezone-groups" wx:if="{{!searchKeyword}}">
+    <view class="section-header">
+      <text class="section-title">按时区浏览</text>
+    </view>
+    <view class="groups-list">
+      <view class="group-item" 
+            wx:for="{{timezoneGroups}}" 
+            wx:key="name"
+            bindtap="selectTimezoneGroup"
+            data-group="{{item}}">
+        <view class="group-info">
+          <text class="group-name">{{item.name}}</text>
+          <text class="group-count">{{item.timezones.length}}个城市</text>
+        </view>
+        <text class="group-arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-actions" wx:if="{{selectedCities.length > 0}}">
+    <view class="selected-info">
+      <text class="selected-count">已选择 {{selectedCities.length}} 个城市</text>
+    </view>
+    <button class="add-selected-btn" bindtap="addSelectedCities">添加到首页</button>
+  </view>
+</view>

@@ -1,0 +1,451 @@
+/* pages/time-converter/time-converter.wxss */
+.container {
+  padding: 20rpx;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 页面头部 */
+.page-header {
+  text-align: center;
+  margin-bottom: 40rpx;
+  padding: 20rpx 0;
+}
+
+.page-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+}
+
+.page-subtitle {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+}
+
+/* 时区选择区域 */
+.timezone-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 15rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+}
+
+.timezone-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.timezone-selector:hover {
+  transform: translateY(-2rpx);
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.15);
+}
+
+.timezone-info {
+  flex: 1;
+}
+
+.timezone-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.timezone-detail {
+  font-size: 22rpx;
+  color: #7f8c8d;
+  font-family: monospace;
+}
+
+.selector-arrow {
+  font-size: 24rpx;
+  color: #7f8c8d;
+}
+
+/* 时间显示区域 */
+.time-display-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 转换按钮 */
+.convert-section {
+  text-align: center;
+  margin: 40rpx 0;
+}
+
+.convert-btn {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50rpx;
+  padding: 25rpx 50rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15rpx;
+  box-shadow: 0 6rpx 20rpx rgba(39, 174, 96, 0.3);
+  transition: all 0.3s ease;
+}
+
+.convert-btn:hover {
+  transform: translateY(-2rpx);
+  box-shadow: 0 8rpx 32rpx rgba(39, 174, 96, 0.4);
+}
+
+.convert-btn[disabled] {
+  background: #bdc3c7;
+  box-shadow: none;
+  transform: none;
+}
+
+.convert-icon {
+  font-size: 32rpx;
+}
+
+.convert-text {
+  font-size: 28rpx;
+}
+
+/* 时间差信息 */
+.time-difference {
+  margin-bottom: 30rpx;
+}
+
+.difference-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  padding: 25rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.difference-label {
+  font-size: 24rpx;
+  color: #7f8c8d;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.difference-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* 快捷时区 */
+.quick-timezones {
+  margin-bottom: 30rpx;
+}
+
+.timezone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200rpx, 1fr));
+  gap: 15rpx;
+}
+
+.quick-timezone-item {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12rpx;
+  padding: 20rpx;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.quick-timezone-item:hover {
+  transform: translateY(-2rpx);
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.15);
+}
+
+.quick-flag {
+  font-size: 32rpx;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.quick-name {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.quick-country {
+  font-size: 20rpx;
+  color: #7f8c8d;
+  display: block;
+}
+
+/* 自定义时间输入 */
+.custom-time-section {
+  margin-bottom: 30rpx;
+}
+
+.time-input-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  padding: 25rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  margin-bottom: 20rpx;
+}
+
+.input-label {
+  font-size: 24rpx;
+  color: #2c3e50;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.picker-input {
+  width: 100%;
+  padding: 20rpx;
+  border: 2rpx solid #ecf0f1;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #2c3e50;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.apply-time-btn {
+  background: #667eea;
+  color: #ffffff;
+  border: none;
+  border-radius: 20rpx;
+  padding: 15rpx 30rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* 转换历史 */
+.conversion-history {
+  margin-bottom: 30rpx;
+}
+
+.history-list {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25rpx;
+  border-bottom: 1rpx solid #ecf0f1;
+  transition: background-color 0.3s ease;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-item:hover {
+  background: #f8f9fa;
+}
+
+.history-info {
+  flex: 1;
+}
+
+.history-source {
+  font-size: 26rpx;
+  color: #2c3e50;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.history-time {
+  font-size: 22rpx;
+  color: #7f8c8d;
+}
+
+.history-arrow {
+  font-size: 24rpx;
+  color: #7f8c8d;
+}
+
+.clear-history-btn {
+  background: #e74c3c;
+  color: #ffffff;
+  border: none;
+  border-radius: 20rpx;
+  padding: 15rpx 30rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* 操作提示 */
+.operation-tips {
+  text-align: center;
+  padding: 20rpx;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15rpx 25rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+}
+
+/* 动画效果 */
+.container {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.page-header {
+  animation: slideInDown 0.6s ease-out;
+}
+
+.timezone-section {
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.convert-section {
+  animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+.quick-timezones,
+.custom-time-section,
+.conversion-history {
+  animation: slideInUp 0.6s ease-out 0.6s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-50rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .container {
+    padding: 15rpx;
+  }
+  
+  .page-title {
+    font-size: 40rpx;
+  }
+  
+  .page-subtitle {
+    font-size: 24rpx;
+  }
+  
+  .timezone-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .quick-timezone-item {
+    padding: 15rpx;
+  }
+  
+  .quick-name {
+    font-size: 22rpx;
+  }
+  
+  .quick-country {
+    font-size: 18rpx;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .timezone-selector,
+  .time-display-section,
+  .difference-card,
+  .quick-timezone-item,
+  .time-input-card,
+  .history-list {
+    background: rgba(44, 62, 80, 0.95);
+    color: #ecf0f1;
+  }
+  
+  .timezone-name,
+  .difference-value,
+  .quick-name,
+  .input-label,
+  .history-source {
+    color: #ecf0f1;
+  }
+  
+  .timezone-detail,
+  .difference-label,
+  .quick-country,
+  .history-time {
+    color: #bdc3c7;
+  }
+  
+  .picker-input {
+    background: #34495e;
+    border-color: #4a6741;
+    color: #ecf0f1;
+  }
+  
+  .history-item {
+    border-bottom-color: #4a6741;
+  }
+  
+  .tip-text {
+    background: rgba(44, 62, 80, 0.3);
+    color: rgba(236, 240, 241, 0.8);
+  }
+}

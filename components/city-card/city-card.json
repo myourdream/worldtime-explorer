@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "time-display": "/components/time-display/time-display"
+  }
+}

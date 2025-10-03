@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "time-display": "/components/time-display/time-display"
+  },
+  "navigationBarTitleText": "时区转换",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "light"
+}

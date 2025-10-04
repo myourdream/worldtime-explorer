@@ -62,33 +62,33 @@ export const CityCard: React.FC<CityCardProps> = ({
       {/* 卡片内容 */}
       <div className="relative z-10">
         {/* 头部信息 */}
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-md">
-              <MapPin className="w-6 h-6 text-white" />
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex items-center space-x-4">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <MapPin className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-700 transition-colors">
+              <h3 className="text-2xl font-bold text-gray-900 group-hover:text-indigo-700 transition-colors mb-1">
                 {city.name}
               </h3>
-              <p className="text-sm text-gray-600 font-medium">{city.country}</p>
+              <p className="text-base text-gray-600 font-medium">{city.country}</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             {/* 收藏按钮 */}
             <button
               onClick={handleFavoriteClick}
               className={`
-                p-2 rounded-full transition-all duration-200 transform hover:scale-110
+                p-3 rounded-full transition-all duration-200 transform hover:scale-110
                 ${isFavorite 
-                  ? 'bg-yellow-100 text-yellow-600 shadow-md' 
+                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg' 
                   : 'text-gray-400 hover:text-yellow-500 hover:bg-yellow-50'
                 }
               `}
             >
               <Heart 
-                className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} 
+                className={`w-6 h-6 ${isFavorite ? 'fill-current' : ''}`} 
               />
             </button>
             
@@ -96,16 +96,16 @@ export const CityCard: React.FC<CityCardProps> = ({
             {showRemove && (
               <button
                 onClick={handleRemoveClick}
-                className="p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all duration-200"
+                className="p-3 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all duration-200"
               >
-                <Plus className="w-5 h-5 rotate-45" />
+                <Plus className="w-6 h-6 rotate-45" />
               </button>
             )}
           </div>
         </div>
         
         {/* 时间显示区域 */}
-        <div className="mb-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+        <div className="mb-6 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-2 border-indigo-200">
           <TimeDisplay
             timezone={city.timezone}
             format="TIME_ONLY"
@@ -117,23 +117,23 @@ export const CityCard: React.FC<CityCardProps> = ({
         
         {/* 时区信息 */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <Clock className="w-4 h-4" />
-              <span className="font-mono font-medium">{city.offset}</span>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-3 text-base text-gray-600">
+              <Clock className="w-5 h-5 text-indigo-500" />
+              <span className="font-mono font-semibold text-indigo-700">{city.offset}</span>
             </div>
             
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <MapPin className="w-4 h-4" />
-              <span className="font-medium">{city.timezone.split('/')[1]?.replace('_', ' ')}</span>
+            <div className="flex items-center space-x-3 text-base text-gray-500">
+              <MapPin className="w-5 h-5 text-purple-500" />
+              <span className="font-semibold">{city.timezone.split('/')[1]?.replace('_', ' ')}</span>
             </div>
           </div>
           
           {/* 收藏状态指示 */}
           {isFavorite && (
-            <div className="flex items-center space-x-1 text-yellow-600">
+            <div className="flex items-center space-x-2 text-yellow-600 bg-yellow-50 px-3 py-1 rounded-full">
               <Star className="w-4 h-4 fill-current" />
-              <span className="text-xs font-medium">已收藏</span>
+              <span className="text-sm font-semibold">已收藏</span>
             </div>
           )}
         </div>

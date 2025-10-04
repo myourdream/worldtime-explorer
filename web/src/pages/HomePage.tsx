@@ -33,17 +33,17 @@ export const HomePage: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
       {/* 顶部导航栏 */}
       <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200/50">
         <div className="container-modern py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
                 <Globe className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">世界时间</h1>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">世界时间</h1>
                 <p className="text-sm text-gray-600">实时查看全球主要城市时间</p>
               </div>
             </div>
@@ -52,12 +52,12 @@ export const HomePage: React.FC = () => {
               <button
                 onClick={handleRefresh}
                 disabled={isLoading}
-                className="p-2 rounded-full text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200"
+                className="p-2 rounded-full text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200"
               >
                 <RefreshCcw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
               </button>
               
-              <button className="p-2 rounded-full text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200">
+              <button className="p-2 rounded-full text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200">
                 <Settings className="w-5 h-5" />
               </button>
             </div>
@@ -71,7 +71,7 @@ export const HomePage: React.FC = () => {
         <div className="mb-8">
           <div className="modern-card p-8 text-center animate-fade-in">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <Clock className="w-6 h-6 text-primary-600" />
+              <Clock className="w-6 h-6 text-indigo-600" />
               <h2 className="text-2xl font-bold text-gray-900">当前时间</h2>
             </div>
             
@@ -102,14 +102,14 @@ export const HomePage: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <Star className="w-6 h-6 text-accent-600" />
+              <Star className="w-6 h-6 text-yellow-500" />
               <h2 className="text-2xl font-bold text-gray-900">主要城市</h2>
-              <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
+              <span className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
                 {cities.length}个城市
               </span>
             </div>
             
-            <button className="btn-primary flex items-center space-x-2">
+            <button className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 flex items-center space-x-2">
               <Search className="w-4 h-4" />
               <span>搜索城市</span>
             </button>
@@ -149,7 +149,7 @@ export const HomePage: React.FC = () => {
         {/* 快速操作区域 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="modern-card p-6 text-center hover-lift">
-            <div className="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">搜索城市</h3>
@@ -157,7 +157,7 @@ export const HomePage: React.FC = () => {
           </div>
           
           <div className="modern-card p-6 text-center hover-lift">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <Clock className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">时区转换</h3>
@@ -165,7 +165,7 @@ export const HomePage: React.FC = () => {
           </div>
           
           <div className="modern-card p-6 text-center hover-lift">
-            <div className="w-12 h-12 bg-gradient-to-br from-success to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <Star className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">收藏管理</h3>
@@ -178,28 +178,28 @@ export const HomePage: React.FC = () => {
       <div className="nav-bar">
         <div className="container-modern py-4">
           <div className="flex items-center justify-around">
-            <button className="flex flex-col items-center space-y-1 text-primary-600">
-              <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
+            <button className="flex flex-col items-center space-y-1 text-indigo-600">
+              <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
                 <Globe className="w-4 h-4" />
               </div>
               <span className="text-xs font-medium">首页</span>
             </button>
             
-            <button className="flex flex-col items-center space-y-1 text-gray-500 hover:text-primary-600 transition-colors">
+            <button className="flex flex-col items-center space-y-1 text-gray-500 hover:text-indigo-600 transition-colors">
               <div className="w-8 h-8 rounded-full flex items-center justify-center">
                 <Search className="w-4 h-4" />
               </div>
               <span className="text-xs font-medium">搜索</span>
             </button>
             
-            <button className="flex flex-col items-center space-y-1 text-gray-500 hover:text-primary-600 transition-colors">
+            <button className="flex flex-col items-center space-y-1 text-gray-500 hover:text-indigo-600 transition-colors">
               <div className="w-8 h-8 rounded-full flex items-center justify-center">
                 <Clock className="w-4 h-4" />
               </div>
               <span className="text-xs font-medium">转换</span>
             </button>
             
-            <button className="flex flex-col items-center space-y-1 text-gray-500 hover:text-primary-600 transition-colors">
+            <button className="flex flex-col items-center space-y-1 text-gray-500 hover:text-indigo-600 transition-colors">
               <div className="w-8 h-8 rounded-full flex items-center justify-center">
                 <Settings className="w-4 h-4" />
               </div>

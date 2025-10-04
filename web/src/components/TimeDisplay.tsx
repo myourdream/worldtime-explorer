@@ -53,9 +53,9 @@ export const TimeDisplay: React.FC<TimeDisplayProps> = ({
   
   // 尺寸样式
   const sizeClasses = {
-    small: 'text-sm',
-    medium: 'text-lg',
-    large: 'text-3xl'
+    small: 'text-lg',
+    medium: 'text-2xl',
+    large: 'text-5xl'
   };
   
   return (
@@ -70,19 +70,19 @@ export const TimeDisplay: React.FC<TimeDisplayProps> = ({
       
       {/* 时间显示 */}
       <div className="text-center">
-        <div className="font-mono font-bold text-gray-900 mb-2">
+        <div className="font-mono font-bold text-indigo-700 mb-3 text-shadow-sm">
           {formattedTime}
         </div>
         
         {/* 日期显示 */}
         {showDate && formattedDate && (
-          <div className="text-sm text-gray-600 mb-1">
+          <div className="text-lg text-gray-600 mb-2 font-medium">
             {formattedDate} {dayOfWeek}
           </div>
         )}
         
         {/* 时区信息 */}
-        <div className="text-xs text-gray-500 font-medium">
+        <div className="text-sm text-indigo-500 font-semibold">
           UTC{offsetStr}
         </div>
       </div>

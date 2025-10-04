@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { Home, Search, Clock, Settings } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { HomePage } from './pages/HomePage';
 import { CitySearchPage } from './pages/CitySearchPage';
 import { TimeConverterPage } from './pages/TimeConverterPage';
@@ -116,6 +118,12 @@ export const App: React.FC = () => {
           </div>
         </div>
       </nav>
+      
+      {/* Vercel Analytics */}
+      <Analytics />
+      
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
     </div>
   );
 };

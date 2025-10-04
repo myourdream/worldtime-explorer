@@ -73,13 +73,17 @@
   }
   
   body {
-    @apply bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    color: #1f2937;
     font-feature-settings: "rlig" 1, "calt" 1;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
   }
   
   .dark body {
-    @apply bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100;
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    color: #f9fafb;
   }
 }
 
@@ -128,7 +132,20 @@
   
   /* 城市卡片样式 */
   .city-card {
-    @apply modern-card p-6 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer group;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .city-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
   
   /* 导航栏样式 */
@@ -199,6 +216,20 @@
   
   /* 容器样式 */
   .container-modern {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .container-modern {
+      padding: 0 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container-modern {
+      padding: 0 2rem;
+    }
   }
 }

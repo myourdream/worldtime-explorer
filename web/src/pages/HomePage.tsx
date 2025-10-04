@@ -33,17 +33,17 @@ export const HomePage: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
       {/* 顶部导航栏 */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
+      <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200/50">
         <div className="container-modern py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
                 <Globe className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gradient">世界时间</h1>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">世界时间</h1>
                 <p className="text-sm text-gray-600">实时查看全球主要城市时间</p>
               </div>
             </div>
@@ -52,12 +52,12 @@ export const HomePage: React.FC = () => {
               <button
                 onClick={handleRefresh}
                 disabled={isLoading}
-                className="p-2 rounded-full text-gray-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
+                className="p-2 rounded-full text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200"
               >
                 <RefreshCcw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
               </button>
               
-              <button className="p-2 rounded-full text-gray-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200">
+              <button className="p-2 rounded-full text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200">
                 <Settings className="w-5 h-5" />
               </button>
             </div>
@@ -116,7 +116,7 @@ export const HomePage: React.FC = () => {
           </div>
           
           {/* 城市网格 */}
-          <div className="grid-responsive">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cities.map((city, index) => (
               <div
                 key={city.timezone}

@@ -57,18 +57,18 @@ export const CityCard: React.FC<CityCardProps> = ({
       onClick={handleCardClick}
     >
       {/* 背景装饰 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-accent-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
       {/* 卡片内容 */}
       <div className="relative z-10">
         {/* 头部信息 */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-md">
               <MapPin className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary-700 transition-colors">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-700 transition-colors">
                 {city.name}
               </h3>
               <p className="text-sm text-gray-600 font-medium">{city.country}</p>
@@ -82,8 +82,8 @@ export const CityCard: React.FC<CityCardProps> = ({
               className={`
                 p-2 rounded-full transition-all duration-200 transform hover:scale-110
                 ${isFavorite 
-                  ? 'bg-accent-100 text-accent-600 shadow-md' 
-                  : 'text-gray-400 hover:text-accent-500 hover:bg-accent-50'
+                  ? 'bg-yellow-100 text-yellow-600 shadow-md' 
+                  : 'text-gray-400 hover:text-yellow-500 hover:bg-yellow-50'
                 }
               `}
             >
@@ -131,7 +131,7 @@ export const CityCard: React.FC<CityCardProps> = ({
           
           {/* 收藏状态指示 */}
           {isFavorite && (
-            <div className="flex items-center space-x-1 text-accent-600">
+            <div className="flex items-center space-x-1 text-yellow-600">
               <Star className="w-4 h-4 fill-current" />
               <span className="text-xs font-medium">已收藏</span>
             </div>
@@ -140,7 +140,7 @@ export const CityCard: React.FC<CityCardProps> = ({
       </div>
       
       {/* 悬停效果装饰 */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-200/20 to-accent-200/20 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500" />
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-200/20 to-indigo-200/20 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500" />
     </div>
   );
 };

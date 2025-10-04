@@ -1,7 +1,7 @@
 // src/components/CityCard.tsx - 现代化城市卡片组件
 
 import React, { useState } from 'react';
-import { Heart, MapPin, Clock, Star, Plus } from 'lucide-react';
+import { Heart, MapPin, Clock, Star, X } from 'lucide-react';
 import { TimezoneInfo } from '@shared/timezone';
 import { TimeDisplay } from './TimeDisplay';
 import { useTimeStore } from '../store/timeStore';
@@ -50,45 +50,45 @@ export const CityCard: React.FC<CityCardProps> = ({
   return (
     <div 
       className={`
-        city-card group relative overflow-hidden
+        city-card-modern group relative overflow-hidden cursor-pointer
         ${isAnimating ? 'animate-pulse' : ''}
         ${className}
       `}
       onClick={handleCardClick}
     >
       {/* 背景装饰 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
       {/* 卡片内容 */}
       <div className="relative z-10">
         {/* 头部信息 */}
         <div className="flex items-start justify-between mb-6">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
-              <MapPin className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 rounded-modern-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-modern">
+              <MapPin className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 group-hover:text-indigo-700 transition-colors mb-1">
+              <h3 className="text-white font-bold text-xl group-hover:text-blue-300 transition-colors mb-1">
                 {city.name}
               </h3>
-              <p className="text-base text-gray-600 font-medium">{city.country}</p>
+              <p className="text-white/70 font-medium">{city.country}</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
             {/* 收藏按钮 */}
             <button
               onClick={handleFavoriteClick}
               className={`
-                p-3 rounded-full transition-all duration-200 transform hover:scale-110
+                p-2 rounded-modern transition-modern transform hover:scale-110
                 ${isFavorite 
-                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg' 
-                  : 'text-gray-400 hover:text-yellow-500 hover:bg-yellow-50'
+                  ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-modern' 
+                  : 'text-white/60 hover:text-yellow-400 hover:bg-yellow-500/20'
                 }
               `}
             >
               <Heart 
-                className={`w-6 h-6 ${isFavorite ? 'fill-current' : ''}`} 
+                className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} 
               />
             </button>
             
@@ -96,42 +96,42 @@ export const CityCard: React.FC<CityCardProps> = ({
             {showRemove && (
               <button
                 onClick={handleRemoveClick}
-                className="p-3 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all duration-200"
+                className="p-2 rounded-modern text-white/60 hover:text-red-400 hover:bg-red-500/20 transition-modern"
               >
-                <Plus className="w-6 h-6 rotate-45" />
+                <X className="w-5 h-5" />
               </button>
             )}
           </div>
         </div>
         
         {/* 时间显示区域 */}
-        <div className="mb-6 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-2 border-indigo-200">
+        <div className="mb-6 p-6 bg-modern-lg rounded-modern-lg border-modern">
           <TimeDisplay
             timezone={city.timezone}
             format="TIME_ONLY"
             showSeconds={true}
             size="large"
-            className="text-center"
+            className="text-center time-display-modern"
           />
         </div>
         
         {/* 时区信息 */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-3 text-base text-gray-600">
-              <Clock className="w-5 h-5 text-indigo-500" />
-              <span className="font-mono font-semibold text-indigo-700">{city.offset}</span>
+            <div className="flex items-center space-x-2 text-white/70">
+              <Clock className="w-4 h-4 text-blue-400" />
+              <span className="font-mono font-semibold text-blue-300">{city.offset}</span>
             </div>
             
-            <div className="flex items-center space-x-3 text-base text-gray-500">
-              <MapPin className="w-5 h-5 text-purple-500" />
-              <span className="font-semibold">{city.timezone.split('/')[1]?.replace('_', ' ')}</span>
+            <div className="flex items-center space-x-2 text-white/60">
+              <MapPin className="w-4 h-4 text-purple-400" />
+              <span className="font-medium text-sm">{city.timezone.split('/')[1]?.replace('_', ' ')}</span>
             </div>
           </div>
           
           {/* 收藏状态指示 */}
           {isFavorite && (
-            <div className="flex items-center space-x-2 text-yellow-600 bg-yellow-50 px-3 py-1 rounded-full">
+            <div className="flex items-center space-x-2 text-yellow-400 bg-yellow-500/20 px-3 py-1 rounded-modern">
               <Star className="w-4 h-4 fill-current" />
               <span className="text-sm font-semibold">已收藏</span>
             </div>
@@ -140,7 +140,7 @@ export const CityCard: React.FC<CityCardProps> = ({
       </div>
       
       {/* 悬停效果装饰 */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-200/20 to-indigo-200/20 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500" />
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-500/10 to-purple-600/10 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500" />
     </div>
   );
 };

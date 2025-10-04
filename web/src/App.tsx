@@ -1,4 +1,4 @@
-// src/App.tsx - 主应用组件
+// src/App.tsx - 现代化主应用组件
 
 import React, { useState } from 'react';
 import { Home, Search, Clock, Settings } from 'lucide-react';
@@ -20,12 +20,20 @@ export const App: React.FC = () => {
       case 'converter':
         return <TimeConverterPage />;
       case 'settings':
-        return <div className="min-h-screen gradient-bg flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-3xl font-bold mb-4">设置页面</h1>
-            <p className="text-white/80">设置功能开发中...</p>
+        return (
+          <div className="min-h-screen">
+            <div className="container-modern py-8">
+              <div className="card-modern p-12 text-center">
+                <div className="w-20 h-20 rounded-modern-lg bg-modern-lg flex items-center justify-center mx-auto mb-6">
+                  <Settings className="w-10 h-10 text-white/60" />
+                </div>
+                <h1 className="text-heading-2 text-white mb-3">设置页面</h1>
+                <p className="text-body">设置功能开发中...</p>
+              </div>
+            </div>
+            <div className="h-20"></div>
           </div>
-        </div>;
+        );
       default:
         return <HomePage />;
     }
@@ -38,56 +46,72 @@ export const App: React.FC = () => {
         {renderPage()}
       </main>
       
-      {/* 底部导航 */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md border-t border-white/20">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-around py-2">
+      {/* 现代化底部导航 */}
+      <nav className="nav-modern">
+        <div className="container-modern py-4">
+          <div className="flex items-center justify-around">
             <button
               onClick={() => setCurrentPage('home')}
-              className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors ${
+              className={`flex flex-col items-center py-2 px-4 rounded-modern transition-modern ${
                 currentPage === 'home' 
-                  ? 'text-white bg-white/20' 
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
+                  ? 'text-white bg-modern-lg border-modern' 
+                  : 'text-white/60 hover:text-white hover:bg-modern'
               }`}
             >
-              <Home className="w-5 h-5 mb-1" />
-              <span className="text-xs">首页</span>
+              <div className={`w-8 h-8 rounded-modern flex items-center justify-center mb-1 ${
+                currentPage === 'home' ? 'bg-blue-500' : 'bg-transparent'
+              }`}>
+                <Home className="w-5 h-5" />
+              </div>
+              <span className="text-xs font-medium">首页</span>
             </button>
             
             <button
               onClick={() => setCurrentPage('search')}
-              className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors ${
+              className={`flex flex-col items-center py-2 px-4 rounded-modern transition-modern ${
                 currentPage === 'search' 
-                  ? 'text-white bg-white/20' 
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
+                  ? 'text-white bg-modern-lg border-modern' 
+                  : 'text-white/60 hover:text-white hover:bg-modern'
               }`}
             >
-              <Search className="w-5 h-5 mb-1" />
-              <span className="text-xs">搜索</span>
+              <div className={`w-8 h-8 rounded-modern flex items-center justify-center mb-1 ${
+                currentPage === 'search' ? 'bg-blue-500' : 'bg-transparent'
+              }`}>
+                <Search className="w-5 h-5" />
+              </div>
+              <span className="text-xs font-medium">搜索</span>
             </button>
             
             <button
               onClick={() => setCurrentPage('converter')}
-              className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors ${
+              className={`flex flex-col items-center py-2 px-4 rounded-modern transition-modern ${
                 currentPage === 'converter' 
-                  ? 'text-white bg-white/20' 
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
+                  ? 'text-white bg-modern-lg border-modern' 
+                  : 'text-white/60 hover:text-white hover:bg-modern'
               }`}
             >
-              <Clock className="w-5 h-5 mb-1" />
-              <span className="text-xs">转换</span>
+              <div className={`w-8 h-8 rounded-modern flex items-center justify-center mb-1 ${
+                currentPage === 'converter' ? 'bg-blue-500' : 'bg-transparent'
+              }`}>
+                <Clock className="w-5 h-5" />
+              </div>
+              <span className="text-xs font-medium">转换</span>
             </button>
             
             <button
               onClick={() => setCurrentPage('settings')}
-              className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors ${
+              className={`flex flex-col items-center py-2 px-4 rounded-modern transition-modern ${
                 currentPage === 'settings' 
-                  ? 'text-white bg-white/20' 
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
+                  ? 'text-white bg-modern-lg border-modern' 
+                  : 'text-white/60 hover:text-white hover:bg-modern'
               }`}
             >
-              <Settings className="w-5 h-5 mb-1" />
-              <span className="text-xs">设置</span>
+              <div className={`w-8 h-8 rounded-modern flex items-center justify-center mb-1 ${
+                currentPage === 'settings' ? 'bg-blue-500' : 'bg-transparent'
+              }`}>
+                <Settings className="w-5 h-5" />
+              </div>
+              <span className="text-xs font-medium">设置</span>
             </button>
           </div>
         </div>

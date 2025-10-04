@@ -55,34 +55,34 @@ export const TimeDisplay: React.FC<TimeDisplayProps> = ({
   const sizeClasses = {
     small: 'text-lg',
     medium: 'text-2xl',
-    large: 'text-5xl'
+    large: 'text-4xl'
   };
   
   return (
-    <div className={`time-display ${sizeClasses[size]} ${className}`}>
+    <div className={`time-display-modern ${sizeClasses[size]} ${className}`}>
       {/* 城市信息 */}
       {cityInfo && (
-        <div className="mb-3">
-          <h3 className="text-lg font-bold text-gray-900">{cityInfo.name}</h3>
-          <p className="text-sm text-gray-600">{cityInfo.country}</p>
+        <div className="mb-4">
+          <h3 className="text-white font-bold text-lg">{cityInfo.name}</h3>
+          <p className="text-white/70 text-sm">{cityInfo.country}</p>
         </div>
       )}
       
       {/* 时间显示 */}
       <div className="text-center">
-        <div className="font-mono font-bold text-indigo-700 mb-3 text-shadow-sm">
+        <div className="font-mono font-bold text-white mb-3 text-shadow-sm">
           {formattedTime}
         </div>
         
         {/* 日期显示 */}
         {showDate && formattedDate && (
-          <div className="text-lg text-gray-600 mb-2 font-medium">
+          <div className="text-white/80 mb-2 font-medium">
             {formattedDate} {dayOfWeek}
           </div>
         )}
         
         {/* 时区信息 */}
-        <div className="text-sm text-indigo-500 font-semibold">
+        <div className="text-white/60 font-semibold text-sm">
           UTC{offsetStr}
         </div>
       </div>

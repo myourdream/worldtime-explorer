@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* 现代设计系统色彩 */
+    /* 现代化设计系统色彩 */
     --primary-50: 239 246 255;
     --primary-100: 219 234 254;
     --primary-200: 191 219 254;
@@ -38,19 +38,38 @@
     --gray-800: 30 41 59;
     --gray-900: 15 23 42;
     
-    --success: 34 197 94;
-    --warning: 251 191 36;
+    --success: 16 185 129;
+    --warning: 245 158 11;
     --error: 239 68 68;
     
-    /* 设计系统变量 */
-    --radius: 0.75rem;
-    --radius-sm: 0.5rem;
-    --radius-lg: 1rem;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    /* 现代化设计系统变量 */
+    --radius: 1rem;
+    --radius-sm: 0.75rem;
+    --radius-lg: 1.5rem;
+    --radius-xl: 2rem;
+    
+    /* 多层次阴影系统 */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    
+    /* 现代化间距系统 */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    
+    /* 动画时长 */
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
   }
 
   .dark {
@@ -72,140 +91,281 @@
     @apply border-gray-200;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #1f2937;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    color: #f8fafc;
     font-feature-settings: "rlig" 1, "calt" 1;
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   .dark body {
-    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-    color: #f9fafb;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    color: #f8fafc;
   }
 }
 
 @layer components {
-  /* 现代卡片样式 */
-  .modern-card {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
-  }
-  
-  .dark .modern-card {
-    @apply bg-gray-800/80 border-gray-700/20;
-  }
-  
-  /* 玻璃拟态效果 */
-  .glass-card {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-xl;
-  }
-  
-  /* 渐变背景 */
-  .gradient-bg {
-    background: linear-gradient(135deg, rgb(var(--primary-600)) 0%, rgb(var(--primary-800)) 50%, rgb(var(--primary-900)) 100%);
-  }
-  
-  .accent-gradient {
-    background: linear-gradient(135deg, rgb(var(--accent-500)) 0%, rgb(var(--accent-600)) 100%);
-  }
-  
-  /* 时间显示样式 */
-  .time-display {
-    font-variant-numeric: tabular-nums;
-    @apply font-mono font-bold text-2xl text-gray-900;
-  }
-  
-  .dark .time-display {
-    @apply text-gray-100;
-  }
-  
-  /* 按钮样式 */
-  .btn-primary {
-    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg hover:from-primary-600 hover:to-primary-700 transition-all duration-200 active:scale-95;
-  }
-  
-  .btn-secondary {
-    @apply bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-medium border border-white/30 hover:bg-white/30 transition-all duration-200;
-  }
-  
-  /* 城市卡片样式 */
-  .city-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    margin-bottom: 1.5rem;
+  /* 现代化卡片系统 */
+  .card-modern {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    transition: all var(--duration-normal) cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
   }
   
-  .city-card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    border-color: rgba(102, 126, 234, 0.5);
+  .card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(255, 255, 255, 0.2);
   }
   
-  .city-card::before {
+  .card-modern::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--duration-normal);
   }
   
-  .city-card:hover::before {
+  .card-modern:hover::before {
     opacity: 1;
   }
   
-  /* 导航栏样式 */
-  .nav-bar {
-    @apply fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-gray-200/50;
+  /* 玻璃拟态效果 */
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   }
   
-  .dark .nav-bar {
-    @apply bg-gray-900/80 border-gray-700/50;
+  /* 现代化按钮系统 */
+  .btn-primary {
+    background: linear-gradient(135deg, rgb(var(--primary-500)) 0%, rgb(var(--primary-600)) 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    transition: all var(--duration-normal) cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, rgb(var(--primary-600)) 0%, rgb(var(--primary-700)) 100%);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all var(--duration-normal) cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+  
+  /* 现代化城市卡片 */
+  .city-card-modern {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .city-card-modern:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+  
+  .city-card-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgb(var(--primary-500)), rgb(var(--accent-500)));
+    opacity: 0;
+    transition: opacity var(--duration-normal);
+  }
+  
+  .city-card-modern:hover::before {
+    opacity: 1;
+  }
+  
+  /* 时间显示样式 */
+  .time-display-modern {
+    font-variant-numeric: tabular-nums;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* 现代化导航栏 */
+  .nav-modern {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 50;
+  }
+  
+  /* 现代化输入框 */
+  .input-modern {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    color: white;
+    font-size: 0.875rem;
+    transition: all var(--duration-normal);
+  }
+  
+  .input-modern:focus {
+    outline: none;
+    border-color: rgb(var(--primary-500));
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .input-modern::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  /* 现代化选择框 */
+  .select-modern {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    color: white;
+    font-size: 0.875rem;
+    transition: all var(--duration-normal);
+    cursor: pointer;
+  }
+  
+  .select-modern:focus {
+    outline: none;
+    border-color: rgb(var(--primary-500));
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .select-modern option {
+    background: rgb(15, 23, 42);
+    color: white;
   }
   
   /* 动画效果 */
   .animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .animate-slide-up {
-    animation: slideUp 0.4s ease-out;
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  .animate-pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   /* 悬停效果 */
   .hover-lift {
-    @apply transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg;
+    transition: transform var(--duration-normal) cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
   }
   
   /* 文本渐变 */
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
+  .text-gradient-primary {
+    background: linear-gradient(135deg, rgb(var(--primary-400)) 0%, rgb(var(--primary-600)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
-  .dark .text-gradient {
-    @apply from-primary-400 to-primary-600;
+  .text-gradient-accent {
+    background: linear-gradient(135deg, rgb(var(--accent-400)) 0%, rgb(var(--accent-600)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* 现代化容器 */
+  .container-modern {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .container-modern {
+      padding: 0 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container-modern {
+      padding: 0 2rem;
+    }
   }
 }
 
 @layer utilities {
-  /* 自定义动画 */
+  /* 现代化动画 */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -228,27 +388,197 @@
     }
   }
   
-  /* 响应式网格 */
-  .grid-responsive {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   
-  /* 容器样式 */
-  .container-modern {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
+  
+  /* 响应式网格系统 */
+  .grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .grid-cities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
   
   @media (min-width: 640px) {
-    .container-modern {
-      padding: 0 1.5rem;
+    .grid-cities {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
   }
   
   @media (min-width: 1024px) {
-    .container-modern {
-      padding: 0 2rem;
+    .grid-cities {
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     }
+  }
+  
+  /* 现代化间距工具 */
+  .space-y-modern > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  .space-x-modern > * + * {
+    margin-left: 1rem;
+  }
+  
+  /* 现代化文本样式 */
+  .text-heading-1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+  
+  .text-heading-2 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+  }
+  
+  .text-heading-3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  
+  .text-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .text-caption {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  /* 现代化阴影工具 */
+  .shadow-modern {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .shadow-modern-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .shadow-modern-xl {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* 现代化边框工具 */
+  .border-modern {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .border-modern-lg {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* 现代化背景工具 */
+  .bg-modern {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+  }
+  
+  .bg-modern-lg {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+  }
+  
+  /* 现代化圆角工具 */
+  .rounded-modern {
+    border-radius: 1rem;
+  }
+  
+  .rounded-modern-lg {
+    border-radius: 1.5rem;
+  }
+  
+  .rounded-modern-xl {
+    border-radius: 2rem;
+  }
+  
+  /* 现代化过渡工具 */
+  .transition-modern {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .transition-fast {
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .transition-slow {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* 现代化变换工具 */
+  .transform-modern {
+    transform: translateY(-2px);
+  }
+  
+  .transform-modern-lg {
+    transform: translateY(-4px);
+  }
+  
+  .transform-modern-xl {
+    transform: translateY(-6px);
+  }
+  
+  /* 现代化透明度工具 */
+  .opacity-modern {
+    opacity: 0.8;
+  }
+  
+  .opacity-modern-lg {
+    opacity: 0.6;
+  }
+  
+  .opacity-modern-xl {
+    opacity: 0.4;
+  }
+  
+  /* 现代化模糊工具 */
+  .blur-modern {
+    backdrop-filter: blur(10px);
+  }
+  
+  .blur-modern-lg {
+    backdrop-filter: blur(20px);
+  }
+  
+  .blur-modern-xl {
+    backdrop-filter: blur(30px);
   }
 }

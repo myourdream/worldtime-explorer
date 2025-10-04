@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Home, Search, Clock, Settings } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 import { HomePage } from './pages/HomePage';
 import { CitySearchPage } from './pages/CitySearchPage';
 import { TimeConverterPage } from './pages/TimeConverterPage';
@@ -12,6 +12,11 @@ type Page = 'home' | 'search' | 'converter' | 'settings';
 
 export const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
+  
+  // 初始化Speed Insights
+  React.useEffect(() => {
+    injectSpeedInsights();
+  }, []);
   
   const renderPage = () => {
     switch (currentPage) {
@@ -121,9 +126,6 @@ export const App: React.FC = () => {
       
       {/* Vercel Analytics */}
       <Analytics />
-      
-      {/* Vercel Speed Insights */}
-      <SpeedInsights />
     </div>
   );
 };

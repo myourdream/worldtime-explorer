@@ -136,8 +136,8 @@ Component({
       if (!time || !this.data.cityData.timezone) return
 
       try {
-        const formatOptions = Constants.TIME_FORMATS[this.data.timeFormat] || Constants.TIME_FORMATS.FULL
-        const formattedTime = TimezoneUtils.formatTime(time, this.data.cityData.timezone, formatOptions)
+        // 使用TimezoneUtils的formatTime方法，现在返回一致的数字格式
+        const formattedTime = TimezoneUtils.formatTime(time, this.data.cityData.timezone, Constants.TIME_FORMATS.FULL)
         
         this.setData({ 
           displayTime: formattedTime,
@@ -157,8 +157,8 @@ Component({
       if (!time || !this.data.cityData.timezone) return
 
       try {
-        const dateOptions = Constants.TIME_FORMATS.DATE_ONLY
-        const formattedDate = TimezoneUtils.formatTime(time, this.data.cityData.timezone, dateOptions)
+        // 使用TimezoneUtils的formatTime方法，现在返回一致的数字格式
+        const formattedDate = TimezoneUtils.formatTime(time, this.data.cityData.timezone, Constants.TIME_FORMATS.DATE_ONLY)
         
         const dayNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
         const dayOfWeek = dayNames[time.getDay()]

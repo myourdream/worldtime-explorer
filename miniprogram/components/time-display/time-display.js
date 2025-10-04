@@ -160,30 +160,8 @@ Component({
      */
     updateTimeParts(time) {
       try {
-        const formatOptions = Constants.TIME_FORMATS[this.data.format] || Constants.TIME_FORMATS.FULL
-        
-        // 获取本地化的时间字符串
-        const timeString = time.toLocaleString('zh-CN', {
-          ...formatOptions,
-          timeZone: this.data.timezone
-        })
-        
-        // 解析时间部分
-        const timeParts = timeString.split(' ')[1] || timeString.split(' ')[0]
-        const [timePart, period] = timeParts.split(' ')
-        
-        if (timePart) {
-          const [hours, minutes, seconds] = timePart.split(':')
-          
-          this.setData({
-            hours: hours || '00',
-            minutes: minutes || '00',
-            seconds: seconds || '00',
-            period: period || '',
-            showPeriod: !!period && this.data.format !== 'FULL'
-          })
-        }
-
+        // 直接使用备用方法，确保格式一致
+        this.updateTimePartsFallback(time)
       } catch (error) {
         console.error('更新时间部分失败:', error)
         // 使用备用方法
@@ -224,10 +202,14 @@ Component({
      */
     updateDate(time) {
       try {
-        const dateOptions = Constants.TIME_FORMATS.DATE_ONLY
-        const formattedDate = TimezoneUtils.formatTime(time, this.data.timezone, dateOptions)
+        // 使用数字格式确保一致性
+        const year = time.getFullYear()
+        const month = (time.getMonth() + 1).toString().padStart(2, '0')
+        const day = time.getDate().toString().padStart(2, '0')
         
-        this.setData({ formattedDate })
+        this.setData({ 
+          formattedDate: `${year}/${month}/${day}`
+        })
       } catch (error) {
         console.error('更新日期失败:', error)
         this.setData({ formattedDate: '日期错误' })

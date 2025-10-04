@@ -1,16 +1,31 @@
-// utils/timezone.js - 时区工具函数
+// shared/timezone.ts - 时区工具函数
+
+export interface TimezoneInfo {
+  name: string;
+  timezone: string;
+  country: string;
+  offset: string;
+}
+
+export interface TimeFormatOptions {
+  year?: boolean;
+  month?: boolean;
+  day?: boolean;
+  hour?: boolean;
+  minute?: boolean;
+  second?: boolean;
+}
 
 /**
  * 时区工具类
  * 提供时区转换、时间格式化等功能
  */
-class TimezoneUtils {
+export class TimezoneUtils {
   
   /**
    * 获取所有支持的时区列表
-   * @returns {Array} 时区列表
    */
-  static getSupportedTimezones() {
+  static getSupportedTimezones(): TimezoneInfo[] {
     return [
       // 亚洲时区
       { name: '北京', timezone: 'Asia/Shanghai', country: '中国', offset: '+08:00' },
@@ -55,201 +70,178 @@ class TimezoneUtils {
       { name: '约翰内斯堡', timezone: 'Africa/Johannesburg', country: '南非', offset: '+02:00' },
       { name: '拉各斯', timezone: 'Africa/Lagos', country: '尼日利亚', offset: '+01:00' },
       { name: '内罗毕', timezone: 'Africa/Nairobi', country: '肯尼亚', offset: '+03:00' }
-    ]
+    ];
   }
 
   /**
    * 根据关键词搜索时区
-   * @param {string} keyword 搜索关键词
-   * @returns {Array} 匹配的时区列表
    */
-  static searchTimezones(keyword) {
+  static searchTimezones(keyword: string): TimezoneInfo[] {
     if (!keyword || keyword.trim() === '') {
-      return this.getSupportedTimezones()
+      return this.getSupportedTimezones();
     }
     
-    const searchTerm = keyword.toLowerCase().trim()
+    const searchTerm = keyword.toLowerCase().trim();
     return this.getSupportedTimezones().filter(item => 
       item.name.toLowerCase().includes(searchTerm) ||
       item.country.toLowerCase().includes(searchTerm) ||
       item.timezone.toLowerCase().includes(searchTerm)
-    )
+    );
   }
 
   /**
    * 获取指定时区的当前时间
-   * @param {string} timezone 时区
-   * @returns {Date} 当前时间
    */
-  static getCurrentTime(timezone) {
+  static getCurrentTime(timezone: string): Date {
     try {
-      const now = new Date()
-      return new Date(now.toLocaleString('en-US', { timeZone: timezone }))
+      const now = new Date();
+      return new Date(now.toLocaleString('en-US', { timeZone: timezone }));
     } catch (error) {
-      console.error('获取时区时间错误:', error)
-      return new Date()
+      console.error('获取时区时间错误:', error);
+      return new Date();
     }
   }
 
   /**
    * 格式化时间
-   * @param {Date} date 时间对象
-   * @param {string} timezone 时区
-   * @param {Object} options 格式化选项
-   * @returns {string} 格式化后的时间字符串
    */
-  static formatTime(date, timezone = 'Asia/Shanghai', options = {}) {
+  static formatTime(date: Date, timezone: string = 'Asia/Shanghai', options: TimeFormatOptions = {}): string {
     try {
-      const defaultOptions = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-        timeZone: timezone
-      }
+      // 获取指定时区的时间
+      const timeInTimezone = new Date(date.toLocaleString('en-US', { timeZone: timezone }));
       
-      const formatOptions = { ...defaultOptions, ...options }
-      return date.toLocaleString('zh-CN', formatOptions)
+      // 使用数字格式确保一致性
+      const year = timeInTimezone.getFullYear();
+      const month = (timeInTimezone.getMonth() + 1).toString().padStart(2, '0');
+      const day = timeInTimezone.getDate().toString().padStart(2, '0');
+      const hours = timeInTimezone.getHours().toString().padStart(2, '0');
+      const minutes = timeInTimezone.getMinutes().toString().padStart(2, '0');
+      const seconds = timeInTimezone.getSeconds().toString().padStart(2, '0');
+      
+      // 根据选项返回不同格式
+      if (options.year && options.month && options.day && options.hour && options.minute && options.second) {
+        return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+      } else if (options.year && options.month && options.day) {
+        return `${year}/${month}/${day}`;
+      } else if (options.hour && options.minute && options.second) {
+        return `${hours}:${minutes}:${seconds}`;
+      } else if (options.hour && options.minute) {
+        return `${hours}:${minutes}`;
+      } else {
+        return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+      }
     } catch (error) {
-      console.error('时间格式化错误:', error)
-      return '时间格式错误'
+      console.error('时间格式化错误:', error);
+      return '时间格式错误';
     }
   }
 
   /**
    * 获取时区偏移量
-   * @param {string} timezone 时区
-   * @returns {number} 偏移量（小时）
    */
-  static getTimezoneOffset(timezone) {
+  static getTimezoneOffset(timezone: string): number {
     try {
-      const now = new Date()
-      const utc = new Date(now.getTime() + (now.getTimezoneOffset() * 60000))
-      const targetTime = new Date(utc.toLocaleString('en-US', { timeZone: timezone }))
-      return (targetTime.getTime() - utc.getTime()) / (1000 * 60 * 60)
+      const now = new Date();
+      const utc = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+      const targetTime = new Date(utc.toLocaleString('en-US', { timeZone: timezone }));
+      return (targetTime.getTime() - utc.getTime()) / (1000 * 60 * 60);
     } catch (error) {
-      console.error('获取时区偏移错误:', error)
-      return 0
+      console.error('获取时区偏移错误:', error);
+      return 0;
     }
   }
 
   /**
    * 转换时间到指定时区
-   * @param {Date} date 原始时间
-   * @param {string} fromTimezone 源时区
-   * @param {string} toTimezone 目标时区
-   * @returns {Date} 转换后的时间
    */
-  static convertTimezone(date, fromTimezone, toTimezone) {
+  static convertTimezone(date: Date, fromTimezone: string, toTimezone: string): Date {
     try {
       // 先转换到UTC
-      const utcTime = new Date(date.toLocaleString('en-US', { timeZone: fromTimezone }))
+      const utcTime = new Date(date.toLocaleString('en-US', { timeZone: fromTimezone }));
       // 再转换到目标时区
-      return new Date(utcTime.toLocaleString('en-US', { timeZone: toTimezone }))
+      return new Date(utcTime.toLocaleString('en-US', { timeZone: toTimezone }));
     } catch (error) {
-      console.error('时区转换错误:', error)
-      return date
+      console.error('时区转换错误:', error);
+      return date;
     }
   }
 
   /**
    * 计算两个时区的时间差
-   * @param {string} timezone1 时区1
-   * @param {string} timezone2 时区2
-   * @returns {number} 时间差（小时）
    */
-  static getTimeDifference(timezone1, timezone2) {
+  static getTimeDifference(timezone1: string, timezone2: string): number {
     try {
-      const offset1 = this.getTimezoneOffset(timezone1)
-      const offset2 = this.getTimezoneOffset(timezone2)
-      return offset1 - offset2
+      const offset1 = this.getTimezoneOffset(timezone1);
+      const offset2 = this.getTimezoneOffset(timezone2);
+      return offset1 - offset2;
     } catch (error) {
-      console.error('计算时区差错误:', error)
-      return 0
+      console.error('计算时区差错误:', error);
+      return 0;
     }
   }
 
   /**
    * 获取时区信息
-   * @param {string} timezone 时区
-   * @returns {Object} 时区信息
    */
-  static getTimezoneInfo(timezone) {
-    const timezones = this.getSupportedTimezones()
-    return timezones.find(tz => tz.timezone === timezone) || null
+  static getTimezoneInfo(timezone: string): TimezoneInfo | null {
+    const timezones = this.getSupportedTimezones();
+    return timezones.find(tz => tz.timezone === timezone) || null;
   }
 
   /**
    * 检查是否为夏令时
-   * @param {string} timezone 时区
-   * @returns {boolean} 是否为夏令时
    */
-  static isDST(timezone) {
+  static isDST(timezone: string): boolean {
     try {
-      const now = new Date()
-      const jan = new Date(now.getFullYear(), 0, 1)
-      const jul = new Date(now.getFullYear(), 6, 1)
+      const janOffset = this.getTimezoneOffset(timezone);
+      const julOffset = this.getTimezoneOffset(timezone);
       
-      const janOffset = this.getTimezoneOffset(timezone)
-      const julOffset = this.getTimezoneOffset(timezone)
-      
-      return janOffset !== julOffset
+      return janOffset !== julOffset;
     } catch (error) {
-      console.error('检查夏令时错误:', error)
-      return false
+      console.error('检查夏令时错误:', error);
+      return false;
     }
   }
 
   /**
    * 获取时间戳
-   * @param {Date} date 时间对象
-   * @returns {number} 时间戳
    */
-  static getTimestamp(date = new Date()) {
-    return Math.floor(date.getTime() / 1000)
+  static getTimestamp(date: Date = new Date()): number {
+    return Math.floor(date.getTime() / 1000);
   }
 
   /**
    * 从时间戳创建时间对象
-   * @param {number} timestamp 时间戳
-   * @returns {Date} 时间对象
    */
-  static fromTimestamp(timestamp) {
-    return new Date(timestamp * 1000)
+  static fromTimestamp(timestamp: number): Date {
+    return new Date(timestamp * 1000);
   }
 
   /**
    * 获取相对时间描述
-   * @param {Date} date 时间对象
-   * @returns {string} 相对时间描述
    */
-  static getRelativeTime(date) {
-    const now = new Date()
-    const diff = now.getTime() - date.getTime()
-    const seconds = Math.floor(diff / 1000)
-    const minutes = Math.floor(seconds / 60)
-    const hours = Math.floor(minutes / 60)
-    const days = Math.floor(hours / 24)
+  static getRelativeTime(date: Date): string {
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
 
     if (seconds < 60) {
-      return '刚刚'
+      return '刚刚';
     } else if (minutes < 60) {
-      return `${minutes}分钟前`
+      return `${minutes}分钟前`;
     } else if (hours < 24) {
-      return `${hours}小时前`
+      return `${hours}小时前`;
     } else if (days < 7) {
-      return `${days}天前`
+      return `${days}天前`;
     } else {
       return this.formatTime(date, 'Asia/Shanghai', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-      })
+        year: true,
+        month: true,
+        day: true
+      });
     }
   }
 }
-
-module.exports = TimezoneUtils

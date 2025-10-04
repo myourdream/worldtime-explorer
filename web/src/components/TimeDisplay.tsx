@@ -1,4 +1,4 @@
-// src/components/TimeDisplay.tsx - 时间显示组件
+// src/components/TimeDisplay.tsx - 现代化时间显示组件
 
 import React from 'react';
 import { TimezoneUtils, TimezoneInfo } from '@shared/timezone';
@@ -55,34 +55,36 @@ export const TimeDisplay: React.FC<TimeDisplayProps> = ({
   const sizeClasses = {
     small: 'text-sm',
     medium: 'text-lg',
-    large: 'text-2xl'
+    large: 'text-3xl'
   };
   
   return (
     <div className={`time-display ${sizeClasses[size]} ${className}`}>
       {/* 城市信息 */}
       {cityInfo && (
-        <div className="mb-2">
-          <h3 className="font-semibold text-foreground">{cityInfo.name}</h3>
-          <p className="text-sm text-muted-foreground">{cityInfo.country}</p>
+        <div className="mb-3">
+          <h3 className="text-lg font-bold text-gray-900">{cityInfo.name}</h3>
+          <p className="text-sm text-gray-600">{cityInfo.country}</p>
         </div>
       )}
       
       {/* 时间显示 */}
-      <div className="font-mono font-bold text-primary">
-        {formattedTime}
-      </div>
-      
-      {/* 日期显示 */}
-      {showDate && formattedDate && (
-        <div className="text-sm text-muted-foreground mt-1">
-          {formattedDate} {dayOfWeek}
+      <div className="text-center">
+        <div className="font-mono font-bold text-gray-900 mb-2">
+          {formattedTime}
         </div>
-      )}
-      
-      {/* 时区信息 */}
-      <div className="text-xs text-muted-foreground mt-1">
-        UTC{offsetStr}
+        
+        {/* 日期显示 */}
+        {showDate && formattedDate && (
+          <div className="text-sm text-gray-600 mb-1">
+            {formattedDate} {dayOfWeek}
+          </div>
+        )}
+        
+        {/* 时区信息 */}
+        <div className="text-xs text-gray-500 font-medium">
+          UTC{offsetStr}
+        </div>
       </div>
     </div>
   );

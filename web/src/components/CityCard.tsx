@@ -1,7 +1,7 @@
-// src/components/CityCard.tsx - 城市卡片组件
+// src/components/CityCard.tsx - 现代化城市卡片组件
 
 import React, { useState } from 'react';
-import { Heart, MapPin, Clock, Star } from 'lucide-react';
+import { Heart, MapPin, Clock, Star, Plus } from 'lucide-react';
 import { TimezoneInfo } from '@shared/timezone';
 import { TimeDisplay } from './TimeDisplay';
 import { useTimeStore } from '../store/timeStore';
@@ -31,7 +31,6 @@ export const CityCard: React.FC<CityCardProps> = ({
     setIsAnimating(true);
     toggleFavorite(city);
     
-    // 动画结束后重置状态
     setTimeout(() => setIsAnimating(false), 300);
   };
   
@@ -51,81 +50,97 @@ export const CityCard: React.FC<CityCardProps> = ({
   return (
     <div 
       className={`
-        card-gradient rounded-lg p-4 cursor-pointer transition-all duration-300
-        hover:scale-105 hover:shadow-lg
+        city-card group relative overflow-hidden
         ${isAnimating ? 'animate-pulse' : ''}
         ${className}
       `}
       onClick={handleCardClick}
     >
-      {/* 头部信息 */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center space-x-2">
-          <MapPin className="w-4 h-4 text-primary" />
-          <div>
-            <h3 className="font-semibold text-white">{city.name}</h3>
-            <p className="text-sm text-white/80">{city.country}</p>
+      {/* 背景装饰 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-accent-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      
+      {/* 卡片内容 */}
+      <div className="relative z-10">
+        {/* 头部信息 */}
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md">
+              <MapPin className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary-700 transition-colors">
+                {city.name}
+              </h3>
+              <p className="text-sm text-gray-600 font-medium">{city.country}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            {/* 收藏按钮 */}
+            <button
+              onClick={handleFavoriteClick}
+              className={`
+                p-2 rounded-full transition-all duration-200 transform hover:scale-110
+                ${isFavorite 
+                  ? 'bg-accent-100 text-accent-600 shadow-md' 
+                  : 'text-gray-400 hover:text-accent-500 hover:bg-accent-50'
+                }
+              `}
+            >
+              <Heart 
+                className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} 
+              />
+            </button>
+            
+            {/* 移除按钮 */}
+            {showRemove && (
+              <button
+                onClick={handleRemoveClick}
+                className="p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all duration-200"
+              >
+                <Plus className="w-5 h-5 rotate-45" />
+              </button>
+            )}
           </div>
         </div>
         
-        <div className="flex items-center space-x-2">
-          {/* 收藏按钮 */}
-          <button
-            onClick={handleFavoriteClick}
-            className={`
-              p-1 rounded-full transition-all duration-200
-              ${isFavorite 
-                ? 'text-yellow-400 hover:text-yellow-300' 
-                : 'text-white/60 hover:text-white'
-              }
-            `}
-          >
-            <Heart 
-              className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} 
-            />
-          </button>
+        {/* 时间显示区域 */}
+        <div className="mb-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+          <TimeDisplay
+            timezone={city.timezone}
+            format="TIME_ONLY"
+            showSeconds={true}
+            size="large"
+            className="text-center"
+          />
+        </div>
+        
+        {/* 时区信息 */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 text-sm text-gray-600">
+              <Clock className="w-4 h-4" />
+              <span className="font-mono font-medium">{city.offset}</span>
+            </div>
+            
+            <div className="flex items-center space-x-2 text-sm text-gray-500">
+              <MapPin className="w-4 h-4" />
+              <span className="font-medium">{city.timezone.split('/')[1]?.replace('_', ' ')}</span>
+            </div>
+          </div>
           
-          {/* 移除按钮 */}
-          {showRemove && (
-            <button
-              onClick={handleRemoveClick}
-              className="p-1 rounded-full text-white/60 hover:text-red-400 transition-colors"
-            >
-              <Star className="w-5 h-5" />
-            </button>
+          {/* 收藏状态指示 */}
+          {isFavorite && (
+            <div className="flex items-center space-x-1 text-accent-600">
+              <Star className="w-4 h-4 fill-current" />
+              <span className="text-xs font-medium">已收藏</span>
+            </div>
           )}
         </div>
       </div>
       
-      {/* 时间显示 */}
-      <div className="mb-3">
-        <TimeDisplay
-          timezone={city.timezone}
-          format="TIME_ONLY"
-          showSeconds={true}
-          size="large"
-          className="text-white"
-        />
-      </div>
-      
-      {/* 时区信息 */}
-      <div className="flex items-center justify-between text-sm text-white/80">
-        <div className="flex items-center space-x-1">
-          <Clock className="w-3 h-3" />
-          <span>{city.offset}</span>
-        </div>
-        
-        <div className="text-xs">
-          {city.timezone.split('/')[1]?.replace('_', ' ')}
-        </div>
-      </div>
-      
-      {/* 收藏状态指示 */}
-      {isFavorite && (
-        <div className="absolute top-2 right-2">
-          <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-        </div>
-      )}
+      {/* 悬停效果装饰 */}
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-200/20 to-accent-200/20 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500" />
     </div>
   );
 };
